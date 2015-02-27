@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 		'uglify',
 		'cssmin',
 		'linkAssetsBuildProd',
+		'bower:clean',
 		'clean:build',
 		'copy:build'
 	]);
