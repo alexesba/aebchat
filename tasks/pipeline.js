@@ -31,6 +31,10 @@ var jsFilesToInject = [
   'js/dependencies/**/*.js',
   'bower_components/jquery/dist//jquery.min.js',
   'bower_components/jquery/dist/js/bootstrap.min.js',
+  'bower_components/underscore/underscore.min.js',
+  'bower_components/lodash/lodash.min.js',
+  'bower_components/angular/angular.min.js',
+  'bower_components/angular-route/angular-route.min.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
@@ -48,7 +52,8 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+  'templates/**/*.html',
+  'templates/**/*.ejs'
 ];
 
 
