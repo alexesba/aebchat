@@ -11,6 +11,12 @@ module.exports = {
 
   attributes: {
     name: 'string',
+    provider: 'string',
+    uid: 'string',
+    email: 'string',
+    firstname: 'string',
+    lastname: 'string',
+    password: 'string',
 
     channels: {
       collection: 'channel',
@@ -27,6 +33,20 @@ module.exports = {
       sails.util.each(user.channels, function(channel){
         var oldName = options.previous.name == 'unknown' ? 'User: #' + id : options.previous.name;
         Channel.message(room.id, { channel: { id: channel.id }, from: { id: 0 }, msg: oldName + "change their name to: " + changes.name }, req);
+      });
+    });
+  },
+  beforeCreate: function (attrs, next) {
+    var bcrypt = require('bcrypt');
+
+    bcrypt.genSalt(10, function(err, salt) {
+      if (err) return next(err);
+
+      bcrypt.hash(attrs.password, salt, function(err, hash) {
+        if (err) return next(err);
+
+        attrs.password = hash;
+        next();
       });
     });
   }

@@ -7,7 +7,9 @@
 
 module.exports = {
 
-
+  index: function(req, res){
+    return "hola ke ase";
+  },
 
   /**
    * `ChannelController.join()`

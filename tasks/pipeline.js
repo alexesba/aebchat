@@ -35,6 +35,8 @@ var jsFilesToInject = [
   'bower_components/lodash/lodash.min.js',
   'bower_components/angular/angular.min.js',
   'bower_components/angular-route/angular-route.min.js',
+  'bower_components/angular-resource/angular-resource.min.js',
+  'bower_components/angular-cookies/angular-cookies.min.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

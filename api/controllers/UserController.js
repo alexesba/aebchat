@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+  login: function(req, res){
+    User.findOneByEmail
+  }
 };
 
