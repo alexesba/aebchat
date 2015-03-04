@@ -16,7 +16,18 @@ brew install mysql or sudo apt-get install mysql
 copy the file config/auth_credentials.json.example as config/auth_credentials.json
 ## Start the application
 #
-Edit the file `config/connections.js` and setup your database credentials
+Edit the file `config/connections.js` and setup your database credentials change all except adapter option.
+```
+  "host": "YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS",
+  "user": "YOUR_MYSQL_USER",
+  "password": "YOUR_MYSQL_PASSWORD",
+  "database": "YOUR_MYSQL_DB"
+  ```
+
+##Setup your database
+Copy the file config/database.json.example as config/database.json and setup your credentials
+Then if you are using postgres you need to specify the database on the models file
+Edit your config/models.js and chnage the name of the connection `someMysqlServer` to `somePostgresqlServer`
 
 ##install all dependencies
 `nmp install`
