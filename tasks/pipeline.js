@@ -29,7 +29,7 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
-  'bower_components/jquery/dist//jquery.min.js',
+  'bower_components/jquery/dist/jquery.min.js',
   'bower_components/jquery/dist/js/bootstrap.min.js',
   'bower_components/underscore/underscore.min.js',
   'bower_components/lodash/lodash.min.js',
@@ -37,6 +37,7 @@ var jsFilesToInject = [
   'bower_components/angular-route/angular-route.min.js',
   'bower_components/angular-resource/angular-resource.min.js',
   'bower_components/angular-cookies/angular-cookies.min.js',
+  'bower_components/bootstrap/dist/js/bootstrap.min.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

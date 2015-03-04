@@ -60,14 +60,16 @@ app.config(function($routeProvider){
        }
     });
 
+    $rootScope.$on('$routeChangeStart', function(next, current) {
+      if(!Session.isLogged() && $location.path() != '/login'){
+        $location.path('/login');
+      }
+
+    });
   });
 
 app.controller('chatCtrl', ['$scope','$location', 'Session',  function($scope, $location, Session){
   $scope.currentUser = Session.data;
-  $scope.demo = function(){
-    debugger
-  }
-
 }]);
 
 app.controller('loginCtrl', ['$scope','$location', '$rootScope', '$cookieStore', 'Session', function($scope, $location, $rootScope, $cookieStore, Session){
