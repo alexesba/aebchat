@@ -35,3 +35,21 @@ Edit your config/models.js and chnage the name of the connection `someMysqlServe
 `bower install`
 ## Run the app
 `sails lift`
+
+
+
+#Run the tests
+
+#### Run all tests
+`make test`
+
+### Run tests under a specific directory
+### This will run all tests under test/unit/controllers directory
+`make test controllers`
+
+### This will run tests under test/unit/controllers and test/unit/models directories
+`make test controllers models`
+
+### Run a specific test file
+### This will run tests in test/unit/controllers/SampleController.test.js file
+`make test controllers/SampleController.test`
