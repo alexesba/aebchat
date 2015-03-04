@@ -11,6 +11,9 @@ a [Sails](http://sailsjs.org) application
 ##Install mysql
 brew install mysql or sudo apt-get install mysql
 
+##Setup the google credentials
+
+copy the file config/auth_credentials.json.example as config/auth_credentials.json
 ## Start the application
 #
 Edit the file `config/connections.js` and setup your database credentials

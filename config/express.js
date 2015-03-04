@@ -1,7 +1,11 @@
 var passport = require('passport')
     , GitHubStrategy = require('passport-github').Strategy
     , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-    , LocalStrategy = require('passport-local').Strategy;
+    , LocalStrategy = require('passport-local').Strategy
+    , authConfig = require('nconf');
+
+  //Load the config file
+    authConfig.env().argv().file({file: 'config/auth_credentials.json'});
 
 
 var verifyHandler = function(token, tokenSecret, profile, done) {
@@ -57,17 +61,9 @@ module.exports.http = {
 
   customMiddleware: function(app) {
 
-    passport.use(new GitHubStrategy({
-      clientID: "YOUR_CLIENT_ID",
-      clientSecret: "YOUR_CLIENT_SECRET",
-      callbackURL: "http://localhost:1337/auth/github/callback"
-    }, verifyHandler));
+    passport.use(new GitHubStrategy( authConfig.get('github'), verifyHandler));
 
-    passport.use(new GoogleStrategy({
-      clientID: '90110212812-vl059hajsnhmvmfpe9e5qmoieble68vr.apps.googleusercontent.com',
-      clientSecret: 'KDMQ7NeHp74xts8uKzgyZr8q',
-      callbackURL: 'http://localhost:1337/auth/google/callback'
-    }, verifyHandler));
+    passport.use(new GoogleStrategy(authConfig.get('google'), verifyHandler));
 
 
     passport.use(new LocalStrategy(function(email, password, done) {
