@@ -8,7 +8,9 @@
 module.exports = {
 
   index: function(req, res){
-    return "hola ke ase";
+    Channel.find(function(err, channels) {
+      res.json(channels);
+    });
   },
 
   /**

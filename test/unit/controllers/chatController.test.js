@@ -6,4 +6,5 @@ describe('chatController', function(){
       request.get('/chat').expect(200);
       });
   });
+
 });
