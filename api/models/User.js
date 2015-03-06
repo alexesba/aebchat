@@ -20,7 +20,7 @@ module.exports = {
       },
     provider: 'string',
     uid: 'string',
-    email: { type: 'string', required: true },
+    email: { type: 'email', required: true },
     firstname: 'string',
     lastname: 'string',
     password: {
@@ -45,6 +45,9 @@ module.exports = {
     },
     name: {
       required: 'Username is required'
+    },
+    password: {
+      password: 'The password doesn\'t match'
     }
   },
 
