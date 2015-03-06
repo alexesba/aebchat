@@ -27,6 +27,7 @@ describe(TEST_NAME, function(){
     it('can\'t be created without the password confirmation', function(done){
       delete(userComplete.passwordConfirmation);
       User.create(userComplete, function(err, user){
+        expect(user).to.not.exist;
         expect(err.Errors.password).to.exist;
         expect(err.Errors.password[0].message).
           to.equal(User.validationMessages.password.password)
