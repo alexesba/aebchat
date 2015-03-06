@@ -24,7 +24,7 @@ describe(TEST_NAME, function(){
       });
     });
 
-    it('can\'t be created without confirm the password', function(done){
+    it('can\'t be created without the password confirmation', function(done){
       delete(userComplete.passwordConfirmation);
       User.create(userComplete, function(err, user){
         expect(err.Errors.password).to.exist;
