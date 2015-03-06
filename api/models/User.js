@@ -8,7 +8,11 @@
 module.exports = {
 
   autosubscribe: ['destroy', 'update'],
-
+  types: {
+    password: function(password){
+      return password === this.passwordConfirmation;
+    }
+  },
   attributes: {
     name: {
       type: 'string',
@@ -19,7 +23,12 @@ module.exports = {
     email: { type: 'string', required: true },
     firstname: 'string',
     lastname: 'string',
-    password: 'string',
+    password: {
+      type: 'string',
+      password: true
+    },
+    passwordConfirmation: 'string',
+
     channels: {
       collection: 'channel',
       via: 'users',
