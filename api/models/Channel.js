@@ -9,10 +9,20 @@ module.exports = {
 
   autosubscribe: ['destroy', 'update', 'add:users', 'remove:users'],
   attributes: {
-    name: 'string',
+    name:{
+      type: 'string',
+      required: true,
+      minLength: 4
+    },
     users: {
       collection: 'user',
       via: 'channels'
+    }
+  },
+  validationMessages: {
+    name:{
+      required: 'The channel name is required',
+      minLength: 'The channel name should be at least 4 characters length'
     }
   },
 
