@@ -1,23 +1,24 @@
 app.config(function($routeProvider){
   $routeProvider.
-  when('/login', {
+    when('/login', {
     template: JST['assets/templates/login.ejs'],
-  controller: 'loginCtrl',
-  resolve: {
-    // I will cause a 1 second delay
-    delay: function($q, $timeout) {
-      var delay = $q.defer();
-      $timeout(delay.resolve, 2000);
-      return delay.promise;
+    controller: 'loginCtrl',
+    resolve: {
+      // I will cause a 1 second delay
+      delay: function($q, $timeout) {
+        var delay = $q.defer();
+        $timeout(delay.resolve, 2000);
+        return delay.promise;
+      }
     }
-  }
   }).when('/', {
     template: JST['assets/templates/home.ejs'],
-  controller: 'chatCtrl'
+    controller: 'chatCtrl'
   }).when('/dashboard', {
     template: JST['assets/templates/home.ejs'],
-  controller: 'chatCtrl',
+    controller: 'chatCtrl',
   });
+
 }).run(function($rootScope, $location, Session) {
   $rootScope.location = $location;
   $rootScope.$watch('session', function(currenUser){
@@ -44,6 +45,5 @@ app.config(function($routeProvider){
     if(!Session.isLogged() && $location.path() != '/login'){
       $location.path('/login');
     }
-
   });
 });
