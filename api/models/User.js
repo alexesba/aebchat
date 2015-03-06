@@ -10,14 +10,16 @@ module.exports = {
   autosubscribe: ['destroy', 'update'],
 
   attributes: {
-    name: 'string',
+    name: {
+      type: 'string',
+      required: true,
+      },
     provider: 'string',
     uid: 'string',
-    email: 'string',
+    email: { type: 'string', required: true },
     firstname: 'string',
     lastname: 'string',
     password: 'string',
-
     channels: {
       collection: 'channel',
       via: 'users',
@@ -25,6 +27,18 @@ module.exports = {
     }
 
   },
+
+  validationMessages: { //hand for i18n & l10n
+    email: {
+      required: 'Email is required',
+      email: 'Provide valid email address',
+      unique: 'Email address is already taken'
+    },
+    name: {
+      required: 'Username is required'
+    }
+  },
+
 
   afterPublishUpdate: function(id, changes, req, options){
     User.findOne(id).populate('channels').exec(function(err, user){
