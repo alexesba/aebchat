@@ -20,7 +20,8 @@ var verifyHandler = function(token, tokenSecret, profile, done) {
           provider: profile.provider,
           uid: profile.id,
           name: profile.displayName,
-          password: profile.id
+          password: profile.id,
+          passwordConfirmation: profile.id
         };
 
         if (profile.emails && profile.emails[0] && profile.emails[0].value) {
