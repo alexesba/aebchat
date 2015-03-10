@@ -11,6 +11,13 @@ describe(TEST_NAME, function(){
     done();
   });
 
+  after(function(done){
+    Channel.drop(function(err){
+      console.log('drop all channels');
+      done();
+    });
+  });
+
   describe('.create()', function(){
 
     it('can\'t be created without a valid name', function(done){
