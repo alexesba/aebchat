@@ -27,9 +27,6 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': 'sessionAuth',
-  'channel': {
-    index: true
-  },
   'auth': {
     '*': true
   }

@@ -33,6 +33,28 @@ module.exports = {
     res.redirect('/');
   },
 
+  login: function(req, res){
+    passport.authenticate('local', function(err, user, info) {
+      if ((err) || (!user))
+        {
+          res.redirect('/login');
+          return;
+        }
+
+        req.logIn(user, function(err) {
+          if (err)
+            {
+              res.view();
+              return;
+            }
+
+            res.redirect('/');
+            return;
+        });
+    })(req, res);
+  },
+
+
   /**
    * `AuthController.github()`
    */
@@ -40,7 +62,6 @@ module.exports = {
     passport.authenticate('github', { failureRedirect: '/#/login' }, function(err, user) {
       req.logIn(user, function(err) {
         if (err) {
-          console.log(err);
           res.view('500');
           return;
         }
