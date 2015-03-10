@@ -23,20 +23,20 @@ describe(TEST_NAME, function(){
       password: '123admin', passwordConfirmation: '123admin'
     };
 
-      User.create(userComplete, function(err, user){
-        expect(user.email).to.exist;
-        request.defaults({ jar: true});
-        request.post('http://localhost:9999/auth/login', {
-          form: { email: user.email, password: user.password}
-        },
-        function(err, response, body){
-          request.get('http://localhost:9999/channel', function(err, res, body){
-            expect(res.statusCode).to.equal(200);
-            done();
-          });
+    User.create(userComplete, function(err, user){
+      expect(user.email).to.exist;
+      request.defaults({ jar: true});
+      request.post('http://localhost:9999/auth/login', {
+        form: { email: user.email, password: user.password}
+      },
+      function(err, response, body){
+        request.get('http://localhost:9999/channel', function(err, res, body){
+          expect(res.statusCode).to.equal(200);
+          done();
         });
-
       });
+
+    });
 
   });
 
