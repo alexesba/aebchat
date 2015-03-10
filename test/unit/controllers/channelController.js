@@ -7,21 +7,27 @@ describe(TEST_NAME, function(){
       name: 'Support'
     }, function(err, channel){
       currentChannel = channel;
+
+      User.create({
+        name: 'First Name',
+        email: 'alexesba@example.com',
+        password: 'supersecret',
+        passwordConfirmation: 'supersecret'
+      }, function(err, user){
+        currentUser = user;
+        done();
+      });
     });
-    User.create({
-      name: 'First Name',
-      email: 'alexesba@example.com',
-      password: 'supersecret',
-      passwordConfirmation: 'supersecret'
-    }, function(err, user){
-      currentUser = user;
-    });
-    done();
 
   });
+
   describe('.join()', function(){
     it('joins to a channel', function(done){
-      done();
+      currentChannel.destroy(function(err){
+        currentUser.destroy(function(err){
+          done();
+        });
+      });
     });
   });
 

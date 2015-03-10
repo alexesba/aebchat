@@ -66,6 +66,7 @@ module.exports = {
           return;
         }
 
+
         res.redirect('/#/login');
         return;
       });
