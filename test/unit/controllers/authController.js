@@ -3,13 +3,19 @@ require('sails-test-helper');
 describe(TEST_NAME, function(){
   var request = require('request')
   //remember cookies for future use
-  request.defaults({ jar: true, localAddress: 'localhost:9999'});
+  request.defaults({ jar: true });
+
+  before(function(done){
+    User.destroy({}).exec(function(err){
+      done();
+    });
+  });
 
   describe('index()', function(){
     it('should be succesfull', function(done){
       request.get({ uri: 'http://localhost:9999/auth', followRedirect: false }, function(err, res, body){
         expect(res.statusCode).to.equal(200);
-      done();
+        done();
       });
     });
   });
@@ -52,18 +58,12 @@ describe(TEST_NAME, function(){
           form: { email: user.email, password: user.password}
         },
         function(err, response, body){
+          expect(response.headers['set-cookie'][0]).to.exists
+          user.destroy();
           done();
         });
       });
     });
-
-    // it('it can get the channel list if is authorized', function(done){
-    //   request.get('http://localhost:9999/channel', function(err, res, body){
-    //     expect(res.statusCode).to.equal(200);
-    //     done();
-    //   });
-    // });
-
   });
 
 });

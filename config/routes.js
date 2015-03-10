@@ -45,10 +45,6 @@ module.exports.routes = {
     controller: 'auth',
     action: 'logout'
   },
-  '/dashboard': {
-    controller: 'channel',
-    action: 'index'
-  }
 
   /***************************************************************************
   *                                                                          *

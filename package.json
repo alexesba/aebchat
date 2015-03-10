@@ -29,7 +29,8 @@
     "sails-memory": "^0.10.3",
     "sails-mysql": "^0.10.11",
     "sails-test-helper": "^0.3.4",
-    "supertest": "^0.15.0"
+    "supertest": "^0.15.0",
+    "tough-cookie": "^0.12.1"
   },
   "name": "aebchat",
   "private": true,

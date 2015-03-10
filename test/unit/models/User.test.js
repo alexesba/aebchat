@@ -11,7 +11,9 @@ describe(TEST_NAME, function(){
       password: '123demo',
       passwordConfirmation: '123demo'
     };
-    done();
+    User.destroy({}).exec(function(err){
+      done();
+    });
   });
 
   describe('.create()', function(){
@@ -40,6 +42,7 @@ describe(TEST_NAME, function(){
         expect(user).to.have.property('name');
         expect(user.name).to.equal('First Name');
         expect(user.email).to.equal('johndo@example.com');
+        user.destroy();
         done();
       });
     });
@@ -47,6 +50,7 @@ describe(TEST_NAME, function(){
     it('has a channel collection', function(done){
       User.create(userComplete, function(err, user){
         expect(user).to.have.property('channels');
+        user.destroy();
         done();
       });
     });

@@ -80,7 +80,6 @@ module.exports = {
     passport.authenticate('google', { failureRedirect: '/#/login', scope: 'https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'}, function(err, user) {
         req.logIn(user, function(err) {
           if (err) {
-            console.log(err);
             return res.view('500');
           }
           return res.redirect('/#/login');

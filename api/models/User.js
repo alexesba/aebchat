@@ -20,7 +20,7 @@ module.exports = {
     },
     provider: 'string',
     uid: 'string',
-    email: { type: 'email', required: true },
+    email: { type: 'email', required: true, unique: true},
     firstname: 'string',
     lastname: 'string',
     password: {

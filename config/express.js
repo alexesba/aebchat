@@ -82,11 +82,8 @@ var passport = require('passport')
               return done(null, false, {
                 message: 'Invalid Password'
               });
-              var returnUser = {
-                username: user.username,
-                createdAt: user.createdAt,
-                id: user.id
-              };
+
+
               return done(null, user, {
                 message: 'Logged In Successfully'
               });
