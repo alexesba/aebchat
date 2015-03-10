@@ -33,46 +33,32 @@ describe(TEST_NAME, function(){
 
 
   describe('login()', function(){
+    var request = require('request')
+    //remember cookies for future use
+    request.defaults({ jar: true });
 
     before(function(done){
-      currenUser  = {};
       userComplete = {
-        name: 'First Name',
-        email: 'admin@example.com',
-        password: '123admin',
-        passwordConfirmation: '123admin'
+        name: 'First Name', email: 'admin@example.com',
+        password: '123admin', passwordConfirmation: '123admin'
       };
       User.create(userComplete, function(err, user){
-        currenUser = user;
-        done();
+        request.post('http://localhost:9999/auth/login', {
+          form: { email: user.email, password: user.password}
+        },
+        function(err, response, body){
+          done();
+        });
       });
     });
 
     it('it can get the channel list if is authorized', function(done){
-      var request = require('request')
-
-      var cookie = null;
-        request({
-          uri: 'http://localhost:9999/auth/login',
-          form: { email: userComplete.email, password: userComplete.password}
-        }, function(err, response, body){
-          var myCookie = request.cookie(response.headers['set-cookie'][0]);
-          var cookieJar = request.jar();
-          cookieJar.setCookie(myCookie, '/');
-
-          request({
-            method: 'GET',
-            uri: 'http://localhost:9999/channel',
-            jar: cookieJar
-          }, function(err, res, body){
-            expect(res.statusCode).to.equal(200);
-            done();
-          });
-
+      request.get('http://localhost:9999/channel', function(err, res, body){
+        expect(res.statusCode).to.equal(200);
+        done();
       });
-
-
     });
+
   });
 
 });
