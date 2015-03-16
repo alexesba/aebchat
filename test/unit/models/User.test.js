@@ -6,10 +6,9 @@ describe(TEST_NAME, function(){
 
   beforeEach(function(done){
     userComplete = {
-      name: 'First Name',
+      username: 'First Name',
       email: 'johndo@example.com',
-      password: '123demo',
-      passwordConfirmation: '123demo'
+      password: '123demo'
     };
     User.destroy({}).exec(function(err){
       done();
@@ -26,21 +25,10 @@ describe(TEST_NAME, function(){
       });
     });
 
-    it('can\'t be created without the password confirmation', function(done){
-      delete(userComplete.passwordConfirmation);
-      User.create(userComplete, function(err, user){
-        expect(user).to.not.exist;
-        expect(err.Errors.password).to.exist;
-        expect(err.Errors.password[0].message).
-          to.equal(User.validationMessages.password.password)
-        done();
-      });
-    });
-
     it('creates a user successfuly', function(done){
       User.create(userComplete, function(err, user){
-        expect(user).to.have.property('name');
-        expect(user.name).to.equal('First Name');
+        expect(user).to.have.property('username');
+        expect(user.username).to.equal('First Name');
         expect(user.email).to.equal('johndo@example.com');
         user.destroy();
         done();
