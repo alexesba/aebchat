@@ -100,7 +100,6 @@ var AuthController = {
    * @param {Object} res
    */
   provider: function (req, res) {
-    console.log(req.params);
     passport.endpoint(req, res);
   },
 
@@ -122,7 +121,6 @@ var AuthController = {
    */
   callback: function (req, res) {
     function tryAgain (err) {
-      console.log('try', err);
 
       // Only certain error messages are returned via req.flash('error', someError)
       // because we shouldn't expose internal authorization errors to the user.
@@ -154,7 +152,6 @@ var AuthController = {
     }
 
     passport.callback(req, res, function (err, user) {
-      console.log('Error:', err);
       if (err) {
         return tryAgain();
       }
