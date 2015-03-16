@@ -18,10 +18,10 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.connections.html
  */
-databaseConfig  = require('nconf');
-  //Load the config file
-databaseConfig.env().argv().file({file: 'config/database.json'});
 
+databaseConfig  = require('nconf');
+//Load the config file
+databaseConfig.env().argv().file({file: 'config/database.conf'});
 
 module.exports.connections = {
 
@@ -66,7 +66,6 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   somePostgresqlServer: databaseConfig.get('pgsql')
-
 
   /***************************************************************************
   *                                                                          *

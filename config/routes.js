@@ -36,15 +36,21 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/login': {
-    controller: 'auth',
-    action: 'index'
-  },
+  'get /login': 'AuthController.login',
+  'get /logout': 'AuthController.logout',
+  'get /register': 'AuthController.register',
 
-  '/logout': {
-    controller: 'auth',
-    action: 'logout'
-  },
+  'post /auth/local': 'AuthController.callback',
+  'post /auth/local/:action': 'AuthController.callback',
+
+  'get /auth/:provider': 'AuthController.provider',
+  'get /auth/:provider/callback': 'AuthController.callback',
+  'get /auth/:provider/:action': 'AuthController.callback',
+
+
+
+
+
 
   /***************************************************************************
   *                                                                          *
