@@ -61,6 +61,7 @@ describe(TEST_NAME, function(){
           user: user.id,
           password: userComplete.password
         }, function(err, passport){
+          _passport = passport;
           request.post('/auth/local')
           .send({
             identifier: userComplete.email,
@@ -68,6 +69,8 @@ describe(TEST_NAME, function(){
           }).end(function(err, res){
             expect(res.status).to.equal(302);
             expect(res.header['location']).to.equal('/');
+            _user.destroy();
+            _passport.destroy();
             done();
           });
         });
