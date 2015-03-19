@@ -26,11 +26,34 @@ var AuthController = {
       {{#each providers}}
         <a href="/auth/{{slug}}" role="button">{{name}}</a>
       {{/each}}
+    */
+    index: function(req, res, next){
+
+      res.redirect('/login');
+    },
+
+    session: function(req, res){
+      id = req.session.passport.user;
+      if(!id)
+        res.end();
+
+      User.findOne(req.session.passport.user, function(err, user){
+        res.json(user);
+      });
+    },
+
+  /*
    *
    * @param {Object} req
    * @param {Object} res
    */
   login: function (req, res) {
+
+    if(req.session.passport.user){
+      req.flash('success', 'Your session is active!');
+      res.redirect('/');
+    }
+
     var strategies = sails.config.passport
       , providers  = {};
 
@@ -69,7 +92,11 @@ var AuthController = {
    */
   logout: function (req, res) {
     req.logout();
-    res.redirect('/');
+    if(req.isSocket){
+      res.json({ message: 'logged out'});
+    }else{
+      res.redirect('/');
+    }
   },
 
   /**
@@ -155,6 +182,7 @@ var AuthController = {
       if (err) {
         return tryAgain();
       }
+
 
       req.login(user, function (err) {
         if (err) {

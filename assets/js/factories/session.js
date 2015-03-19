@@ -7,6 +7,7 @@ app.factory('Session', function ($http, $rootScope) {
     },
     updateSession: function(){
       $http.get('/auth/session').then(function(response){
+        console.log(response);
         Session.data = response.data;
         return $rootScope.session = Session.data;
       });

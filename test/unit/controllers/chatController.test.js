@@ -1,43 +1,38 @@
 require('sails-test-helper');
-describe(TEST_NAME, function(){
-  var request = require('request');
+var request = require('supertest');
+agent = request.agent;
 
+describe(TEST_NAME, function(){
+
+  var user;
   before(function(done){
+    user = agent(sails.hooks.http.app);
     User.destroy({}).exec(function(err){
       done();
     });
   });
 
 
-  it('redirects to login if session doesn\'t exist', function(done){
-    request({ method: 'GET', uri: 'http://localhost:9999/channel', followRedirect: false }, function(err, res, body){
-      expect(res.statusCode).to.equal(302);
-      expect(res.headers['location']).to.include('login');
-      done();
-    });
+  it('restrict access if session doesn\'t exist', function(done){
+    user.get('/channel').expect(403)
+    .expect('You are not permitted to perform this action.', done);
   });
 
-  it('gets the channel if is authorized', function(done){
+
+
+  it('gets the channel list if is authorized', function(done){
     userComplete = {
-      name: 'First Name', email: 'admin@example.com',
-      password: '123admin', passwordConfirmation: '123admin'
+      username: 'admin123',
+      email: 'admin@example.com',
+      password: '123admin'
     };
 
-    User.create(userComplete, function(err, user){
-      expect(user.email).to.exist;
-      request.defaults({ jar: true});
-      request.post('http://localhost:9999/auth/login', {
-        form: { email: user.email, password: user.password}
-      },
-      function(err, response, body){
-        request.get('http://localhost:9999/channel', function(err, res, body){
-          expect(res.statusCode).to.equal(200);
-          done();
-        });
-      });
 
-    });
-
+    user.post('/auth/local/register')
+    .send(userComplete)
+    .end(function(err, res){
+      user.get('/channel').expect(200, done);
+    })
   });
 
 });

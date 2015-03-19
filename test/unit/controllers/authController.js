@@ -1,31 +1,30 @@
 require('sails-test-helper');
+var supertest = require('supertest');
+agent = supertest.agent;
 
 describe(TEST_NAME, function(){
-  var request = require('request')
-  //remember cookies for future use
-  request.defaults({ jar: true });
-
+  var request;
   before(function(done){
+    request = agent(sails.hooks.http.app);
     User.destroy({}).exec(function(err){
       done();
     });
   });
 
   describe('index()', function(){
-    it('should be succesfull', function(done){
-      request.get({ uri: 'http://localhost:9999/auth', followRedirect: false }, function(err, res, body){
-        expect(res.statusCode).to.equal(200);
-        done();
-      });
+    it('should redirect to login', function(done){
+      request.get('/auth')
+      .expect(302, done);
     });
   });
 
 
   describe('google()', function(){
     it('should redirect to google.com/', function(done){
-      request.get({ uri: 'http://localhost:9999/auth/google', followRedirect: false }, function(err, res, body){
-        expect(res.statusCode).to.equal(302);
-        res.headers['location'].should.include('google.com')
+      request.get('/auth/google')
+      .expect(302)
+      .end(function(err,res){
+        res.header['location'].should.include('google.com')
         done();
       });
     });
@@ -33,8 +32,9 @@ describe(TEST_NAME, function(){
 
   describe('github()', function(){
     it('should redirect to google.com/', function(done){
-      request.get({ uri: 'http://localhost:9999/auth/github', followRedirect: false }, function(err, res, body){
-        expect(res.statusCode).to.equal(302);
+      request.get('/auth/github')
+      .expect(302)
+      .end(function(err, res){
         res.headers['location'].should.include('github.com')
         done();
       });
@@ -46,21 +46,30 @@ describe(TEST_NAME, function(){
     var currentUser = null;
     before(function(done){
       userComplete = {
-        name: 'First Name', email: 'admin@example.com',
-        password: '123admin', passwordConfirmation: '123admin'
+        username: 'First Name', email: 'admin@example.com',
+        password: '123admin'
       };
       done();
     });
 
     it('loged in successfuly', function(done){
+      var _user, _passport;
       User.create(userComplete, function(err, user){
-        request.post('http://localhost:9999/auth/login', {
-          form: { email: user.email, password: user.password}
-        },
-        function(err, response, body){
-          expect(response.headers['set-cookie'][0]).to.exists
-          user.destroy();
-          done();
+        _user = user;
+        Passport.create({
+          protocol: 'local',
+          user: user.id,
+          password: userComplete.password
+        }, function(err, passport){
+          request.post('/auth/local')
+          .send({
+            identifier: userComplete.email,
+            password: userComplete.password
+          }).end(function(err, res){
+            expect(res.status).to.equal(302);
+            expect(res.header['location']).to.equal('/');
+            done();
+          });
         });
       });
     });

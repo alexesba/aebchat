@@ -47,6 +47,9 @@ module.exports.routes = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
+  'post /channel/:channelId/users': 'ChannelController.join',
+  'delete /channel/:channelId/users': 'ChannelController.leave'
+
 
 
 
