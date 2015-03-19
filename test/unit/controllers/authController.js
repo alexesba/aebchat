@@ -14,7 +14,10 @@ describe(TEST_NAME, function(){
   describe('index()', function(){
     it('should redirect to login', function(done){
       request.get('/auth')
-      .expect(302, done);
+      .expect(302).end(function(err, res){
+        expect(res.headers['location']).to.equal('/login');
+        done();
+      });
     });
   });
 
