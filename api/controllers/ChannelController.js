@@ -22,7 +22,10 @@ module.exports = {
     // Subscribe the socket to the channel
     Channel.subscribe(req, channelId, ['message']);
     //Continue processing the route
-    return next();
+    req.user.channels.add(channelId);
+    req.user.save(function(err, user){
+      res.json({ User:  req.user.email + 'succesfully added to the chanel: ' + channelId });
+    });
   },
 
 

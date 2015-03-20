@@ -32,9 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
+  '/': 'DashboardController.index',
 
   'get /login': 'AuthController.login',
   'get /logout': 'AuthController.logout',
@@ -46,6 +44,7 @@ module.exports.routes = {
   'get /auth/:provider': 'AuthController.provider',
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
+  'get /session': 'AuthController.session',
 
   'post /channel/:channelId/users': 'ChannelController.join',
   'delete /channel/:channelId/users': 'ChannelController.leave'

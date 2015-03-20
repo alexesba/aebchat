@@ -1,0 +1,23 @@
+<ul class="nav nav-sidebar">
+  <% _.each(userinfo.channels, function (channel) { %>
+    <li ng-repeat="channel in channel.list" >
+    <a href="#/channel/<%=channel.name%>"> <%= channel.name %> </a>
+    </li>
+  <% }) %>
+
+  <!--   <li class="active"><a href="#">Channels <span class="sr-only">(current)</span></a></li> -->
+  <!--   <li><a href="#">Channel 1</a></li> -->
+  <!--   <li><a href="#">Channel 2</a></li> -->
+  <!--   <li><a href="#">Channel 3</a></li> -->
+  <!-- </ul> -->
+  <!-- <ul class="nav nav-sidebar"> -->
+  <!--   <li class="active"><a href="#">Alexesba<span class="sr-only">(current)</span></a></li> -->
+  <!--   <li><a href="">Ignacio</a></li> -->
+  <!--   <li><a href="">Victor</a></li> -->
+  <!-- </ul> -->
+  <!-- <ul class="nav nav-sidebar"> -->
+  <!--   <li><a href="">Current User</a></li> -->
+  <!-- </ul> -->
+</ul>
+
+

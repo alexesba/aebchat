@@ -13,7 +13,6 @@ describe(TEST_NAME, function(){
 
   after(function(done){
     Channel.drop(function(err){
-      console.log('drop all channels');
       done();
     });
   });

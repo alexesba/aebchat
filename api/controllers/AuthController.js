@@ -35,9 +35,9 @@ var AuthController = {
     session: function(req, res){
       id = req.session.passport.user;
       if(!id)
-        res.end();
+        res.forbidden();
 
-      User.findOne(req.session.passport.user, function(err, user){
+      User.findOne(id, function(err, user){
         res.json(user);
       });
     },

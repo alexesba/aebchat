@@ -2,13 +2,13 @@ app.factory('Session', function ($http, $rootScope) {
   $rootScope.session = {};
   var Session = {
     data: {},
+    conn: io.sails.connect('http://localhost:1337'),
     isLogged: function(){
       return !angular.equals({}, $rootScope.session);
     },
     updateSession: function(){
-      $http.get('/auth/session').then(function(response){
-        console.log(response);
-        Session.data = response.data;
+      this.conn.get('/session', function(response){
+        Session.data = response;
         return $rootScope.session = Session.data;
       });
     }

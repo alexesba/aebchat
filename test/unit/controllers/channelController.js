@@ -24,9 +24,9 @@ describe(TEST_NAME,  function(){
         }, function(err, passport){
           currentPassport = passport;
           //login the user and keep the session
-          request.post('/auth/local')
-          .send({ identifier: currentUser.email,
-                password: userAttributes.password
+          request.post('/auth/local').send({
+            identifier: currentUser.email,
+            password: userAttributes.password
           }).end(function(err, res){
             done();
           });
@@ -41,21 +41,17 @@ describe(TEST_NAME,  function(){
 
   describe('.join()', function(){
     it('joins to a channel', function(done){
-
       request.post('/channel/' + currentChannel.id + '/users')
       .send({ channelId: currentChannel.id })
       .expect(200).end(function(err, res){
         console.log(res);
         done();
+        // currentChannel.destroy(function(err){
+        //   currentUser.destroy(function(err){
+        //     done();
+        //   });
+        // });
       });
-
-      // currentChannel.destroy(function(err){
-      //   currentUser.destroy(function(err){
-      //     done();
-      //   });
-      // });
-
-
     });
   });
 
