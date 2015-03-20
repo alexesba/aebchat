@@ -44,6 +44,25 @@ describe(TEST_NAME, function(){
     });
   });
 
+  describe('register()', function(){
+    it('creates a new account succesfully', function(done){
+      var userComplete = {
+        username: 'superadmin',
+        email: 'superadmin@example.com',
+        password: 'superadmin123'
+      };
+      request.post('/auth/local/register')
+      .send(userComplete)
+      .expect(200)
+      .end(function(err, res){
+        User.findOne({ email: userComplete.email}, function(err, user){
+          user.destroy();
+          done();
+        });
+      })
+    });
+  });
+
 
   describe('login()', function(){
     var currentUser = null;

@@ -45,6 +45,7 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   someMysqlServer: databaseConfig.get('mysql'),
+  testMysqlServer: databaseConfig.get('test_mysql'),
 
   /***************************************************************************
   *                                                                          *

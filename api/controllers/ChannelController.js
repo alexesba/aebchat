@@ -16,7 +16,7 @@ module.exports = {
   /**
    * `ChannelController.join()`
    */
-  join: function (req, res) {
+  join: function (req, res, next) {
     // Grab the id of the channel to join
     var channelId = req.param('channelId');
     // Subscribe the socket to the channel
@@ -29,7 +29,7 @@ module.exports = {
   /**
    * `ChannelController.leave()`
    */
-  leave: function (req, res) {
+  leave: function (req, res, next) {
     // Grab the id of the channel to join
     var channelId = req.param('channelId');
 

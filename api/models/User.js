@@ -3,16 +3,11 @@ var User = {
   autosubscribe: ['destroy', 'update'],
   schema: true,
 
-  attributes: {
-    username  : { type: 'string', unique: true },
-    email     : { type: 'email',  unique: true, required: true},
-    passports : { collection: 'Passport', via: 'user' },
-
-    channels: {
-      collection: 'channel',
-      via: 'users',
-      dominant: true
-    }
+  attributes  : {
+    username  : { type       : 'string', unique : true },
+    email     : { type       : 'email',  unique : true, required    : true },
+    passports : { collection : 'Passport', via  : 'user' },
+    channels  : { collection : 'Channel', via   : 'users'  }
   },
   validationMessages: { //hand for i18n & l10n
     email: {
@@ -20,11 +15,8 @@ var User = {
       email: 'Provide valid email address',
       unique: 'Email address is already taken'
     },
-    name: {
-      required: 'Username is required'
-    },
-    password: {
-      password: 'The password doesn\'t match'
+    username: {
+      unique: 'The username is already taken'
     }
   }
 

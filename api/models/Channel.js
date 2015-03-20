@@ -15,7 +15,7 @@ module.exports = {
       minLength: 4
     },
     users: {
-      collection: 'user',
+      collection: 'User',
       via: 'channels'
     }
   },
